@@ -18,16 +18,6 @@ internal class EqualsTest {
     }
 
     @Test
-    fun `Two francs with the same value are equal`() {
-        Money.franc(5) shouldBe Money.franc(5)
-    }
-
-    @Test
-    fun `Two francs with the different value are not equal`() {
-        Money.franc(10) shouldNotBe Money.franc(5)
-    }
-
-    @Test
     fun `A dollar and a franc with the same value are not equal`() {
         Money.dollar(10) shouldNotBe Money.franc(10)
     }
