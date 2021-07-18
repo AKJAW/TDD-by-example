@@ -24,14 +24,23 @@ internal class MultiplicationTest {
     }
 }
 
-data class Franc(val amount: Int)
+abstract class Money {
+    abstract val amount: Int
 
-fun Franc.times(multiplicator: Int): Franc {
+    override fun equals(other: Any?): Boolean {
+        val money = other as? Money
+        return money?.amount == this.amount
+    }
+
+    override fun hashCode(): Int {
+        return amount
+    }
+}
+
+fun Money.times(multiplicator: Int): Franc {
     return Franc(amount * multiplicator)
 }
 
-data class Dollar(val amount: Int)
+class Franc(override val amount: Int) : Money()
 
-fun Dollar.times(multiplicator: Int): Dollar {
-    return Dollar(amount * multiplicator)
-}
+class Dollar(override val amount: Int) : Money()
