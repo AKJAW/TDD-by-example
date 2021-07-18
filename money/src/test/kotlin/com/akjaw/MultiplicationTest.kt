@@ -25,7 +25,10 @@ internal class MultiplicationTest {
 }
 
 abstract class Money {
+
     abstract val amount: Int
+
+    abstract fun times(multiplicator: Int): Money
 
     override fun equals(other: Any?): Boolean {
         val money = other as? Money
@@ -42,10 +45,16 @@ abstract class Money {
     }
 }
 
-fun Money.times(multiplicator: Int): Franc {
-    return Franc(amount * multiplicator)
+class Franc(override val amount: Int) : Money() {
+
+    override fun times(multiplicator: Int): Money {
+        return Franc(amount * multiplicator)
+    }
 }
 
-class Franc(override val amount: Int) : Money()
+class Dollar(override val amount: Int) : Money() {
 
-class Dollar(override val amount: Int) : Money()
+    override fun times(multiplicator: Int): Money {
+        return Dollar(amount * multiplicator)
+    }
+}
