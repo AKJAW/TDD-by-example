@@ -7,24 +7,33 @@ internal class MultiplicationTest {
 
     @Test
     fun `Correctly multiplies dollars`() {
-        val dollar = Dollar(5)
+        val dollar = Money.dollar(5)
 
         val result = dollar.times(2)
 
-        result shouldBe Dollar(10)
+        result shouldBe Money.dollar(10)
     }
 
     @Test
     fun `Correctly multiplies francs`() {
-        val franc = Franc(5)
+        val franc = Money.franc(5)
 
         val result = franc.times(2)
 
-        result shouldBe Franc(10)
+        result shouldBe Money.franc(10)
     }
 }
 
 abstract class Money {
+
+    companion object {
+
+        fun dollar(amount: Int): Money =
+            Dollar(amount)
+
+        fun franc(amount: Int): Money =
+            Franc(amount)
+    }
 
     abstract val amount: Int
 
@@ -43,18 +52,18 @@ abstract class Money {
     override fun toString(): String {
         return "${this.javaClass}(amount=$amount)"
     }
-}
 
-class Franc(override val amount: Int) : Money() {
+    private class Franc(override val amount: Int) : Money() {
 
-    override fun times(multiplicator: Int): Money {
-        return Franc(amount * multiplicator)
+        override fun times(multiplicator: Int): Money {
+            return Franc(amount * multiplicator)
+        }
     }
-}
 
-class Dollar(override val amount: Int) : Money() {
+    private class Dollar(override val amount: Int) : Money() {
 
-    override fun times(multiplicator: Int): Money {
-        return Dollar(amount * multiplicator)
+        override fun times(multiplicator: Int): Money {
+            return Dollar(amount * multiplicator)
+        }
     }
 }

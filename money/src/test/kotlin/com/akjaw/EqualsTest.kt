@@ -8,31 +8,31 @@ internal class EqualsTest {
 
     @Test
     fun `Two dollars with the same value are equal`() {
-        Dollar(5) shouldBe Dollar(5)
+        Money.dollar(5) shouldBe Money.dollar(5)
     }
 
     @Test
     fun `Two dollars with the different value are not equal`() {
-        Dollar(10) shouldNotBe Dollar(5)
+        Money.dollar(10) shouldNotBe Money.dollar(5)
     }
 
     @Test
     fun `Two francs with the same value are equal`() {
-        Franc(5) shouldBe Franc(5)
+        Money.franc(5) shouldBe Money.franc(5)
     }
 
     @Test
     fun `Two francs with the different value are not equal`() {
-        Franc(10) shouldNotBe Franc(5)
+        Money.franc(10) shouldNotBe Money.franc(5)
     }
 
     @Test
     fun `A dollar and a franc with the same value are not equal`() {
-        Dollar(10) shouldNotBe Franc(10)
+        Money.dollar(10) shouldNotBe Money.franc(10)
     }
 
     @Test
     fun `A dollar and a franc with a different value are not equal`() {
-        Dollar(5) shouldNotBe Franc(10)
+        Money.dollar(5) shouldNotBe Money.franc(10)
     }
 }
