@@ -29,11 +29,16 @@ abstract class Money {
 
     override fun equals(other: Any?): Boolean {
         val money = other as? Money
-        return money?.amount == this.amount
+        return this.javaClass == other?.javaClass &&
+                money?.amount == this.amount
     }
 
     override fun hashCode(): Int {
         return amount
+    }
+
+    override fun toString(): String {
+        return "${this.javaClass}(amount=$amount)"
     }
 }
 
