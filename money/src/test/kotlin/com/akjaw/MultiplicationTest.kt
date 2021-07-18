@@ -29,11 +29,13 @@ abstract class Money {
     companion object {
 
         fun dollar(amount: Int): Money =
-            Dollar(amount)
+            Dollar(amount, Currency.USD)
 
         fun franc(amount: Int): Money =
-            Franc(amount)
+            Franc(amount, Currency.CHF)
     }
+
+    abstract val currency: Currency
 
     abstract val amount: Int
 
@@ -53,17 +55,22 @@ abstract class Money {
         return "${this.javaClass}(amount=$amount)"
     }
 
-    private class Franc(override val amount: Int) : Money() {
+    private class Franc(override val amount: Int, override val currency: Currency) : Money() {
 
         override fun times(multiplicator: Int): Money {
-            return Franc(amount * multiplicator)
+            return Franc(amount * multiplicator, currency)
         }
     }
 
-    private class Dollar(override val amount: Int) : Money() {
+    private class Dollar(override val amount: Int, override val currency: Currency) : Money() {
 
         override fun times(multiplicator: Int): Money {
-            return Dollar(amount * multiplicator)
+            return Dollar(amount * multiplicator, currency)
         }
     }
+}
+
+enum class Currency {
+    USD,
+    CHF
 }
