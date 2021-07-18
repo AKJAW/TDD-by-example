@@ -1,8 +1,9 @@
-package com.akjaw
+package com.akjaw.money
 
+import com.akjaw.money.Currency
+import com.akjaw.money.Money
 import io.kotest.assertions.asClue
 import io.kotest.matchers.shouldBe
-import io.kotest.matchers.shouldNotBe
 import org.junit.jupiter.api.Test
 
 internal class CurrencyTest {
