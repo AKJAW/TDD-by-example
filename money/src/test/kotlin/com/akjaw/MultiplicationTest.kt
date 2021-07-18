@@ -13,6 +13,21 @@ internal class MultiplicationTest {
 
         result shouldBe Dollar(10)
     }
+
+    @Test
+    fun `Correctly multiplies francs`() {
+        val franc = Franc(5)
+
+        val result = franc.times(2)
+
+        result shouldBe Franc(10)
+    }
+}
+
+data class Franc(val amount: Int)
+
+fun Franc.times(multiplicator: Int): Franc {
+    return Franc(amount * multiplicator)
 }
 
 data class Dollar(val amount: Int)
