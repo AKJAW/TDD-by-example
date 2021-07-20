@@ -17,4 +17,8 @@ data class Money(
     fun times(multiplicator: Int): Money {
         return Money(currency = currency, amount = amount * multiplicator)
     }
+
+    fun add(dollar: Money): Money {
+        return this.copy(amount = amount + dollar.amount)
+    }
 }
