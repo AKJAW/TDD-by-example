@@ -3,7 +3,7 @@ package com.akjaw.money
 data class Money(
     val currency: Currency,
     val amount: Int
-) {
+) : Expression {
 
     companion object {
 
@@ -21,4 +21,6 @@ data class Money(
     fun add(dollar: Money): Expression {
         return Sum(this, dollar)
     }
+
+    override fun calculate(currency: Currency): Money = this
 }
