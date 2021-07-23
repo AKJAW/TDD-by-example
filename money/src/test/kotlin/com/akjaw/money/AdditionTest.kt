@@ -13,7 +13,7 @@ internal class AdditionTest {
         val dollar = Money.dollar(5)
         val expression = dollar.add(Money.dollar(5))
 
-        val result = bank.calculate(expression, Currency.CHF)
+        val result = bank.calculate(expression, Currency.USD)
 
         result.asClue {
             it shouldBe Money.dollar(10)

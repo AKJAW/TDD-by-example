@@ -1,3 +1,6 @@
 package com.akjaw.money
 
-interface Expression
+interface Expression {
+
+    fun calculate(currency: Currency): Money
+}
