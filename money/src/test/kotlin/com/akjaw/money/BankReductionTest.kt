@@ -43,6 +43,32 @@ internal class BankReductionTest {
         }
     }
 
+    @Test
+    fun `Same currency sum reduction for different currency with a 2-1 rate works`() {
+        givenExchangeRate(usd = 2, chf = 1)
+        val franc = Money.franc(3)
+        val sum = franc.add(Money.franc(3))
+
+        val result = bank.reduce(sum, Currency.USD)
+
+        result.asClue {
+            it shouldBe Money.dollar(12)
+        }
+    }
+
+    @Test
+    fun `Different currency sum reduction for different currency with a 2-1 rate works`() {
+        givenExchangeRate(usd = 2, chf = 1)
+        val franc = Money.dollar(3)
+        val sum = franc.add(Money.franc(3))
+
+        val result = bank.reduce(sum, Currency.USD)
+
+        result.asClue {
+            it shouldBe Money.dollar(9)
+        }
+    }
+
     private fun givenExchangeRate(usd: Int, chf: Int) {
         /* Placeholder */
     }
