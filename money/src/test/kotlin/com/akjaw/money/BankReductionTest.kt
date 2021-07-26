@@ -11,9 +11,9 @@ internal class BankReductionTest {
     @Test
     fun `Sum reduction with the same currency works`() {
         val dollar = Money.dollar(5)
-        val expression = dollar.add(Money.dollar(5))
+        val sum = dollar.add(Money.dollar(5))
 
-        val result = bank.reduce(expression, Currency.USD)
+        val result = bank.reduce(sum, Currency.USD)
 
         result.asClue {
             it shouldBe Money.dollar(10)
@@ -21,7 +21,7 @@ internal class BankReductionTest {
     }
 
     @Test
-    fun `Money reduction works`() {
+    fun `Money reduction for the same currency works`() {
         val dollar = Money.dollar(3)
 
         val result = bank.reduce(dollar, Currency.USD)
@@ -29,6 +29,22 @@ internal class BankReductionTest {
         result.asClue {
             it shouldBe Money.dollar(3)
         }
+    }
+
+    @Test
+    fun `Money reduction for different currency with a 2-1 rate works`() {
+        givenExchangeRate(usd = 2, chf = 1)
+        val franc = Money.franc(3)
+
+        val result = bank.reduce(franc, Currency.USD)
+
+        result.asClue {
+            it shouldBe Money.dollar(6)
+        }
+    }
+
+    private fun givenExchangeRate(usd: Int, chf: Int) {
+        /* Placeholder */
     }
 }
 

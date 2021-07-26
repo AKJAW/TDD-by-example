@@ -18,9 +18,12 @@ data class Money(
         return Money(currency = currency, amount = amount * multiplicator)
     }
 
-    fun add(dollar: Money): Expression {
-        return Sum(this, dollar)
+    fun add(money: Money): Expression {
+        return Sum(this, money)
     }
 
-    override fun calculate(currency: Currency): Money = this
+    override fun calculate(bank: Bank, toCurrency: Currency): Money {
+        val exchangeRate = bank.getExchangeRate(this.currency, toCurrency)
+        return this.copy(amount = this.amount * exchangeRate, currency = toCurrency)
+    }
 }

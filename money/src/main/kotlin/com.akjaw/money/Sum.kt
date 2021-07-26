@@ -5,7 +5,7 @@ class Sum(
     private val addend: Money
 ) : Expression {
 
-    override fun calculate(currency: Currency): Money {
-        return Money(currency = currency, amount = augend.amount + addend.amount)
+    override fun calculate(bank: Bank, toCurrency: Currency): Money {
+        return Money(currency = toCurrency, amount = augend.amount + addend.amount)
     }
 }

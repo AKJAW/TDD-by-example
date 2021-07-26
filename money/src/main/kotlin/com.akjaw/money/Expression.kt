@@ -2,5 +2,5 @@ package com.akjaw.money
 
 interface Expression {
 
-    fun calculate(currency: Currency): Money
+    fun calculate(bank: Bank, toCurrency: Currency): Money
 }
