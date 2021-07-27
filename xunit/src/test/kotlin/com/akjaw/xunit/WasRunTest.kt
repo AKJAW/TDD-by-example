@@ -1,20 +1,33 @@
 package com.akjaw.xunit
 
 import io.kotest.matchers.shouldBe
-import org.junit.jupiter.api.Test
 
 class TestCaseTest(testName: String): TestCase(testName) {
 
+    private lateinit var test: WasRun
+
+    override fun setUp() {
+        test = WasRun("testMethod")
+    }
+
     fun testRunning() {
-        val test = WasRun("testMethod")
         test.wasRun shouldBe false
 
         test.run()
 
         test.wasRun shouldBe true
     }
+
+    fun testWasSetUp() {
+        test.wasSetUp shouldBe false
+
+        test.run()
+
+        test.wasSetUp shouldBe true
+    }
 }
 
 fun main() {
-    TestCaseTest("testRunning").testRunning()
+    TestCaseTest("testRunning").run()
+    TestCaseTest("testWasSetUp").run()
 }
