@@ -15,7 +15,11 @@ class Sum(
     }
 
     override fun add(addend: Expression): Expression {
-        TODO("Not yet implemented")
+        return Sum(this, addend)
+    }
+
+    override fun times(multiplicator: Int): Expression {
+        return Sum(augend.times(multiplicator), addend.times(multiplicator))
     }
 
     private fun exchange(bank: Bank, source: Expression, toCurrency: Currency) =

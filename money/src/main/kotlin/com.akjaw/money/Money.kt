@@ -14,7 +14,7 @@ data class Money(
             Money(currency = Currency.CHF, amount = amount)
     }
 
-    fun times(multiplicator: Int): Expression {
+    override fun times(multiplicator: Int): Expression {
         return Money(currency = currency, amount = amount * multiplicator)
     }
 
