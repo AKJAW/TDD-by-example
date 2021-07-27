@@ -10,7 +10,7 @@ class Bank {
         rates[CurrencyPair(from, to)] = rate
     }
 
-    fun reduce(expression: Expression, currency: Currency): Money {
+    fun reduce(expression: Expression, currency: Currency): Expression {
         return expression.calculate(this, currency)
     }
 

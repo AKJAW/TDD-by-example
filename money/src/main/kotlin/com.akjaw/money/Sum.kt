@@ -1,8 +1,8 @@
 package com.akjaw.money
 
 class Sum(
-    private val augend: Money,
-    private val addend: Money
+    private val augend: Expression,
+    private val addend: Expression
 ) : Expression {
 
     override fun calculate(bank: Bank, toCurrency: Currency): Money {
@@ -14,6 +14,10 @@ class Sum(
         )
     }
 
-    private fun exchange(bank: Bank, source: Money, toCurrency: Currency) =
-        source.amount * bank.getExchangeRate(source.currency, toCurrency)
+    override fun add(addend: Expression): Expression {
+        TODO("Not yet implemented")
+    }
+
+    private fun exchange(bank: Bank, source: Expression, toCurrency: Currency) =
+        source.calculate(bank, toCurrency).amount
 }

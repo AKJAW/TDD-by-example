@@ -14,12 +14,12 @@ data class Money(
             Money(currency = Currency.CHF, amount = amount)
     }
 
-    fun times(multiplicator: Int): Money {
+    fun times(multiplicator: Int): Expression {
         return Money(currency = currency, amount = amount * multiplicator)
     }
 
-    fun add(money: Money): Expression {
-        return Sum(this, money)
+    override fun add(addend: Expression): Expression {
+        return Sum(this, addend)
     }
 
     override fun calculate(bank: Bank, toCurrency: Currency): Money {
