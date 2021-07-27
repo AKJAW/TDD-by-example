@@ -1,15 +1,10 @@
 package com.akjaw.xunit
 
-class WasRun(private val testName: String) {
+class WasRun(testName: String) : TestCase(testName) {
 
     var wasRun: Boolean = false
 
     fun testMethod() {
         wasRun = true
-    }
-
-    fun run() {
-        val currentClass = this::class.java.methods.find { it.name == testName }
-        currentClass!!.invoke(this)
     }
 }

@@ -3,14 +3,18 @@ package com.akjaw.xunit
 import io.kotest.matchers.shouldBe
 import org.junit.jupiter.api.Test
 
-internal class WasRunTest {
+class TestCaseTest(testName: String): TestCase(testName) {
 
-    @Test
-    fun `Correctly runs`() {
+    fun testRunning() {
         val test = WasRun("testMethod")
+        test.wasRun shouldBe false
 
         test.run()
 
         test.wasRun shouldBe true
     }
+}
+
+fun main() {
+    TestCaseTest("testRunning").testRunning()
 }
