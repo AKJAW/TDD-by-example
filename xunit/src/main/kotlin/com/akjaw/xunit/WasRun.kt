@@ -2,14 +2,17 @@ package com.akjaw.xunit
 
 class WasRun(testName: String) : TestCase(testName) {
 
-    var wasSetUp: Boolean = false
-    var wasRun: Boolean = false
+    val functionsCalled: MutableList<String> = mutableListOf()
 
     override fun setUp() {
-        wasSetUp = true
+        functionsCalled.add("setUp")
+    }
+
+    override fun tearDown() {
+        functionsCalled.add("tearDown")
     }
 
     fun testMethod() {
-        wasRun = true
+        functionsCalled.add("testMethod")
     }
 }
