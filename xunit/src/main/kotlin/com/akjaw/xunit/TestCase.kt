@@ -6,8 +6,7 @@ open class TestCase(private val testName: String) {
 
     open fun tearDown() { /* Empty */ }
 
-    fun run(): TestResult {
-        val testResult = TestResult()
+    fun run(testResult: TestResult = TestResult()): TestResult {
         testResult.testStarted()
         try {
             setUp()
