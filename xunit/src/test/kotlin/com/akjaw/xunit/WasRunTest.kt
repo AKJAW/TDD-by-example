@@ -30,7 +30,10 @@ class TestCaseRunningTest(testName: String): TestCase(testName) {
 }
 
 fun main() {
-    TestCaseRunningTest("testRunningBetweenSetUpAndTearDown").run()
-    TestCaseRunningTest("testWasSetUp").run()
-    TestCaseRunningTest("testWasTearedDown").run()
+    val testSuite = TestSuite()
+    testSuite.add(TestCaseRunningTest("testRunningBetweenSetUpAndTearDown"))
+    testSuite.add(TestCaseRunningTest("testWasSetUp"))
+    testSuite.add(TestCaseRunningTest("testWasTearedDown"))
+    testSuite.run().assertResult(numberOfTests = 3, failure = 0)
 }
+

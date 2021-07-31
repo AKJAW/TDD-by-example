@@ -9,7 +9,7 @@ class TestCaseResultTest(testName: String): TestCase(testName) {
 
         val result = test.run()
 
-        result.summary shouldBe "1 run, 0 failed"
+        result.assertResult(numberOfTests = 1, failure = 0)
     }
 
     fun testResultSignalsFailure() {
@@ -17,7 +17,7 @@ class TestCaseResultTest(testName: String): TestCase(testName) {
 
         val result = test.run()
 
-        result.summary shouldBe "1 run, 1 failed"
+        result.assertResult(numberOfTests = 1, failure = 1)
     }
 
     fun testResultSignalsFailureWhenBreaksDuringSetUp() {
@@ -25,12 +25,14 @@ class TestCaseResultTest(testName: String): TestCase(testName) {
 
         val result = test.run()
 
-        result.summary shouldBe "1 run, 1 failed"
+        result.assertResult(numberOfTests = 1, failure = 1)
     }
 }
 
 fun main() {
-    TestCaseResultTest("testResultSignalsSuccess").run().summary shouldBe "1 run, 0 failed"
-    TestCaseResultTest("testResultSignalsFailure").run().summary shouldBe "1 run, 0 failed"
-    TestCaseResultTest("testResultSignalsFailureWhenBreaksDuringSetUp").run().summary shouldBe "1 run, 0 failed"
+    val testSuite = TestSuite()
+    testSuite.add(TestCaseResultTest("testResultSignalsSuccess"))
+    testSuite.add(TestCaseResultTest("testResultSignalsFailure"))
+    testSuite.add(TestCaseResultTest("testResultSignalsFailureWhenBreaksDuringSetUp"))
+    testSuite.run().assertResult(numberOfTests = 3, failure = 0)
 }

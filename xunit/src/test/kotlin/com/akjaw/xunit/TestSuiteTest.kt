@@ -12,7 +12,7 @@ class TestSuiteTest(testName: String): TestCase(testName) {
 
         val result = suite.run()
 
-        result.summary shouldBe "3 run, 0 failed"
+        result.assertResult(numberOfTests = 3, failure = 0)
     }
 
     fun testSuiteFailsAllTests() {
@@ -22,7 +22,7 @@ class TestSuiteTest(testName: String): TestCase(testName) {
 
         val result = suite.run()
 
-        result.summary shouldBe "2 run, 2 failed"
+        result.assertResult(numberOfTests = 2, failure = 2)
     }
 
     fun testSuitePassesPartiallyTests() {
@@ -32,12 +32,16 @@ class TestSuiteTest(testName: String): TestCase(testName) {
 
         val result = suite.run()
 
-        result.summary shouldBe "2 run, 1 failed"
+        result.assertResult(numberOfTests = 2, failure = 1)
     }
 }
 
 fun main() {
-    TestSuiteTest("testSuitePassesAllTests").run().summary shouldBe "1 run, 0 failed"
-    TestSuiteTest("testSuiteFailsAllTests").run().summary shouldBe "1 run, 0 failed"
-    TestSuiteTest("testSuitePassesPartiallyTests").run().summary shouldBe "1 run, 0 failed"
+    TestSuiteTest("testSuitePassesAllTests").run().assertResult(numberOfTests = 1, failure = 0)
+    TestSuiteTest("testSuiteFailsAllTests").run().assertResult(numberOfTests = 1, failure = 0)
+    TestSuiteTest("testSuitePassesPartiallyTests").run().assertResult(numberOfTests = 1, failure = 0)
+}
+
+fun TestResult.assertResult(numberOfTests: Int, failure: Int) {
+    summary shouldBe "$numberOfTests run, $failure failed"
 }
