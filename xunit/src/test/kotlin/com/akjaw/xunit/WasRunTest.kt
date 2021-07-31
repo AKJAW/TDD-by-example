@@ -1,10 +1,8 @@
 package com.akjaw.xunit
 
 import io.kotest.matchers.shouldBe
-import io.kotest.matchers.shouldNot
-import io.kotest.matchers.shouldNotBe
 
-class TestCaseTest(testName: String): TestCase(testName) {
+class TestCaseRunningTest(testName: String): TestCase(testName) {
 
     private lateinit var test: WasRun
 
@@ -12,7 +10,7 @@ class TestCaseTest(testName: String): TestCase(testName) {
         test = WasRun("testMethod")
     }
 
-    fun testRunning() {
+    fun testRunningBetweenSetUpAndTearDown() {
         test.run()
 
         test.functionsCalled[1] shouldBe "testMethod"
@@ -32,7 +30,7 @@ class TestCaseTest(testName: String): TestCase(testName) {
 }
 
 fun main() {
-    TestCaseTest("testRunning").run()
-    TestCaseTest("testWasSetUp").run()
-    TestCaseTest("testWasTearedDown").run()
+    TestCaseRunningTest("testRunningBetweenSetUpAndTearDown").run()
+    TestCaseRunningTest("testWasSetUp").run()
+    TestCaseRunningTest("testWasTearedDown").run()
 }

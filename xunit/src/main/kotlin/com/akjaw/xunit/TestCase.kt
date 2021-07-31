@@ -6,11 +6,18 @@ open class TestCase(private val testName: String) {
 
     open fun tearDown() { /* Empty */ }
 
-    fun run() {
+    fun run(): TestResult {
+        val testResult = TestResult()
+        testResult.testStarted()
         setUp()
-        val testMethod = getMethod(testName)
-        testMethod!!.invoke(this)
+        try {
+            val testMethod = getMethod(testName)
+            testMethod!!.invoke(this)
+        } catch (e: Throwable) {
+            testResult.testFailed()
+        }
         tearDown()
+        return testResult
     }
 
     private fun getMethod(methodName: String) =
