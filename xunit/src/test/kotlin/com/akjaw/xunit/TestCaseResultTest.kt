@@ -13,7 +13,15 @@ class TestCaseResultTest(testName: String): TestCase(testName) {
     }
 
     fun testResultSignalsFailure() {
-        val test = WasRun("testBrokenMethod")
+        val test = BrokenTestCase("testBrokenMethod")
+
+        val result = test.run()
+
+        result.summary shouldBe "1 run, 1 failed"
+    }
+
+    fun testResultSignalsFailureWhenBreaksDuringSetUp() {
+        val test = BrokenTestCase("testMethod")
 
         val result = test.run()
 
@@ -24,4 +32,5 @@ class TestCaseResultTest(testName: String): TestCase(testName) {
 fun main() {
     TestCaseResultTest("testResultSignalsSuccess").run().summary shouldBe "1 run, 0 failed"
     TestCaseResultTest("testResultSignalsFailure").run().summary shouldBe "1 run, 0 failed"
+    TestCaseResultTest("testResultSignalsFailureWhenBreaksDuringSetUp").run().summary shouldBe "1 run, 0 failed"
 }

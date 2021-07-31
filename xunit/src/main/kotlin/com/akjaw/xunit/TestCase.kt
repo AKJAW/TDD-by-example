@@ -9,8 +9,8 @@ open class TestCase(private val testName: String) {
     fun run(): TestResult {
         val testResult = TestResult()
         testResult.testStarted()
-        setUp()
         try {
+            setUp()
             val testMethod = getMethod(testName)
             testMethod!!.invoke(this)
         } catch (e: Throwable) {

@@ -15,9 +15,4 @@ class WasRun(testName: String) : TestCase(testName) {
     fun testMethod() {
         functionsCalled.add("testMethod")
     }
-
-    fun testBrokenMethod() {
-        functionsCalled.add("testBrokenMethod")
-        throw IllegalAccessException()
-    }
 }
